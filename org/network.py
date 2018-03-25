@@ -14,7 +14,7 @@ and omits many desirable features.
 #### Libraries
 # Standard library
 import random
-
+import matplotlib.pyplot as plt
 # Third-party libraries
 import numpy as np
 
@@ -54,7 +54,14 @@ class NeuralNetwork(object):
         epoch, and partial progress printed out.  This is useful for
         tracking progress, but slows things down substantially."""
 
+        plotData = training_data[0]
+        plt.gray()
+        plt.imshow(plotData)
+        plt.show()
+
         training_data = list(training_data)
+
+
         n = len(training_data)
 
         if test_data:
@@ -129,8 +136,11 @@ class NeuralNetwork(object):
         network outputs the correct result. Note that the neural
         network's output is assumed to be the index of whichever
         neuron in the final layer has the highest activation."""
+        #correct images (result, correct)
         test_results = [(np.argmax(self.feedforward(x)), y)
                         for (x, y) in test_data]
+
+
         return sum(int(x == y) for (x, y) in test_results)
 
     def cost_derivative(self, output_activations, y):
